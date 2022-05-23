@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="ubicacion_de_planta">
+        <item>dormitorio</item>
+        <item>salon</item>
+        <item>cocina</item>
+        <item>jardin</item>
+        <item>pasillo</item>
+        <item>terraza</item>
+    </string-array>
+</resources>

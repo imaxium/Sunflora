@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_jardin">
+    <fragment
+        android:id="@+id/navigation_jardin"
+        android:name="com.example.sunflora.FragmentsBottomView.FragmentJardin"
+        android:label="jardin"
+        tools:layout="@layout/fragment_jardin" />
+    <fragment
+        android:id="@+id/navigation_descubrir"
+        android:name="com.example.sunflora.FragmentsBottomView.FragmentDescubrir"
+        android:label="desubrir"
+        tools:layout="@layout/fragment_descubrir" >
+        <action
+            android:id="@+id/action_navigation_descubrir_to_fragmentTipoDeplantas"
+            app:destination="@id/fragmentTipoDeplantas" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_ajustes"
+        android:name="com.example.sunflora.FragmentsBottomView.FragmentAjustes"
+        android:label="ajustes"
+        tools:layout="@layout/fragment_ajustes" />
+    <fragment
+        android:id="@+id/fragmentTipoDeplantas"
+        android:name="com.example.sunflora.registroDePlantas.FragmentTipoDeplantas"
+        android:label="fragment_tipo_deplantas"
+        tools:layout="@layout/fragment_tipo_deplantas" >
+        <action
+            android:id="@+id/action_fragmentTipoDeplantas_to_navigation_descubrir"
+            app:destination="@id/navigation_descubrir" />
+    </fragment>
+</navigation>
