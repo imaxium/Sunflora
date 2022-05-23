@@ -1,5 +1,6 @@
 package com.example.sunflora.RoomDatabase.Entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -8,8 +9,9 @@ import java.util.UUID;
 
 @Entity(tableName = "Planta")
 public class PlantaRoom {
-    @PrimaryKey(autoGenerate = true)
-    int idPlanta;
+    @PrimaryKey(autoGenerate = false)
+    @NonNull
+    String idPlanta;
 
     String nombre;
 
@@ -20,16 +22,16 @@ public class PlantaRoom {
     String tipo;
     String fechaInicioRecordatorio;
 
+    public PlantaRoom(){
+        idPlanta = UUID.randomUUID().toString();
+    }
+
     public String getFechaInicioRecordatorio() { return fechaInicioRecordatorio; }
 
     public void setFechaInicioRecordatorio(String fechaInicioRecordatorio) { this.fechaInicioRecordatorio = fechaInicioRecordatorio; }
 
-    public int getIdPlanta() {
+    public String getIdPlanta() {
         return idPlanta;
-    }
-
-    public void setIdPlanta(int idPlanta) {
-        this.idPlanta = idPlanta;
     }
 
     public String getNombre() {
