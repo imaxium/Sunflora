@@ -11,7 +11,7 @@ public class Recordatorios {
     int ciclo;
     int horaRecordatorio;
     int minRecordatorio;
-    int idPlantaRef;
+    String idPlantaRef;
 
     public int getIdRecordatorio() {
         return idRecordatorio;
@@ -53,11 +53,7 @@ public class Recordatorios {
         this.minRecordatorio = minRecordatorio;
     }
 
-    public int getIdPlantaRef() {
-        return idPlantaRef;
-    }
-
-    public void setIdPlantaRef(int idPlantaRef) {
+    public void setIdPlantaRef(String idPlantaRef) {
         this.idPlantaRef = idPlantaRef;
     }
 }

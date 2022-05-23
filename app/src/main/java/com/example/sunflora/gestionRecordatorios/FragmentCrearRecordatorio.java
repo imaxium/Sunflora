@@ -38,13 +38,15 @@ public class FragmentCrearRecordatorio extends Fragment {
     FragmentCrearRecordatorioBinding binding;
     MaterialTimePicker materialTimePicker;
     DAOPlantas daoPlantas;
-
+    String idPlantaRef;
     public FragmentCrearRecordatorio() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        Bundle bundle = this.getArguments();
+        if (bundle != null) {
+            idPlantaRef = bundle.getString("idPlanta");
         }
     }
 
@@ -103,7 +105,9 @@ public class FragmentCrearRecordatorio extends Fragment {
                 recordatorio.setCiclo(Integer.parseInt(binding.EditTextRepeticiones.getText().toString()));
                 recordatorio.setHoraRecordatorio(materialTimePicker.getHour());
                 recordatorio.setMinRecordatorio(materialTimePicker.getMinute());
+                recordatorio.setIdPlantaRef(idPlantaRef);
                 daoPlantas.insertarRecordatorios(recordatorio);
+
             }
         });
     }

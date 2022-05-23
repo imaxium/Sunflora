@@ -5,7 +5,6 @@ import static android.app.Activity.RESULT_OK;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapRegionDecoder;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -49,7 +48,7 @@ public class FragmentAñadirPlanta extends Fragment {
     ActivityResultLauncher<String> activityResultLauncherGaleria;
 
     MaterialDatePicker materialDatePicker;
-
+    PlantaRoom plantaRoom;
     DAOPlantas daoPlantas;
     public FragmentAñadirPlanta() { }
 
@@ -81,6 +80,7 @@ public class FragmentAñadirPlanta extends Fragment {
         arrayAdaptertipoDePlantas = new ArrayAdapter<String>(getContext(), R.layout.row_dropdowmenu, arrayTipoDePlantas);
 
         binding.autoCompleteTextViewUbicaciones.setAdapter(arrayAdapterUbicaciones);
+        //esto puede que lo borre porque no sirve de mucho
         binding.autoCompleteTextViewUbicaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -89,6 +89,7 @@ public class FragmentAñadirPlanta extends Fragment {
         });
 
         binding.autoCompleteTextViewTipoPlanta.setAdapter(arrayAdaptertipoDePlantas);
+        //esto puede que lo borre porque no sirve de mucho
         binding.autoCompleteTextViewTipoPlanta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
@@ -106,7 +107,7 @@ public class FragmentAñadirPlanta extends Fragment {
         //boton para guardar la planta en la base de datos
         binding.BotonAAdirPlanta.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) { añadirRecordatorio(view); }
+            public void onClick(View view) { añadirPlanta(view); }
         });
 
         //boton para añadir otro recordatorio
@@ -114,6 +115,9 @@ public class FragmentAñadirPlanta extends Fragment {
             @Override
             public void onClick(View view) {
                 fragmentCrearRecordatorio = new FragmentCrearRecordatorio();
+                Bundle bundle = new Bundle();
+                bundle.putString("idPlanta", plantaRoom.getIdPlanta());
+                fragmentCrearRecordatorio.setArguments(bundle);
                 fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.ActivityContenedoraGestionRecordatorios, fragmentCrearRecordatorio).addToBackStack(null).commit();
             }
@@ -155,10 +159,10 @@ public class FragmentAñadirPlanta extends Fragment {
         });
 }
 
-    private void añadirRecordatorio(View view) {
+    private void añadirPlanta(View view) {
         daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
 
-        PlantaRoom plantaRoom = new PlantaRoom();
+        plantaRoom = new PlantaRoom();
         plantaRoom.setNombre(binding.EditTextNombrePlanta.getText().toString());
         plantaRoom.setLocalizacion(binding.autoCompleteTextViewUbicaciones.getText().toString());
         plantaRoom.setTipo(binding.autoCompleteTextViewTipoPlanta.getText().toString());
@@ -193,5 +197,5 @@ public class FragmentAñadirPlanta extends Fragment {
         binding = null;
     }
 
-    public void 
+
 }
