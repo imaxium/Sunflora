@@ -1,4 +1,4 @@
-package com.example.sunflora.adapter;
+package com.example.sunflora.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;

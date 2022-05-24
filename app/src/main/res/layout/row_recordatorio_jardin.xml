@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
     android:elevation="6dp"
-    android:id="@+id/CardViewRecordatorioJardin"
+    android:id="@+id/CardViewPlantaYRecordatorioJardin"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout
@@ -14,7 +14,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/ImageViewPlantaRecordatorio"
+            android:id="@+id/ImageViewPlantaJardin"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_centerVertical="true"
@@ -22,11 +22,11 @@
             android:src="@mipmap/ic_launcher" />
 
         <TextView
-            android:id="@+id/TextviewNombrePlanta"
+            android:id="@+id/TextviewNombrePlantaJardin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ImageViewPlantaRecordatorio"
+            android:layout_toRightOf="@+id/ImageViewPlantaJardin"
             android:text="Nombre planta"
             android:textSize="25sp" />
 
@@ -34,9 +34,9 @@
             android:id="@+id/TextViewNumeroRecordatorios"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/TextviewNombrePlanta"
+            android:layout_below="@+id/TextviewNombrePlantaJardin"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ImageViewPlantaRecordatorio"
+            android:layout_toRightOf="@+id/ImageViewPlantaJardin"
             android:text="Recordatorios: " />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

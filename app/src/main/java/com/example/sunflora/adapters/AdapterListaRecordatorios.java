@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterListaRecordatorios.ViewHolder> {
 
     LayoutInflater inflater;
-    ArrayList<Recordatorios> listaRecordatorios;
+    ArrayList<Recordatorios> listaRecordatorios = new ArrayList<Recordatorios>();
     Context context;
 
     public AdapterListaRecordatorios(Context context, ArrayList<Recordatorios> listaRecordatorios){
@@ -37,8 +37,8 @@ public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterLista
     @Override
     public void onBindViewHolder(@NonNull AdapterListaRecordatorios.ViewHolder holder, int position) {
         holder.tipoRecordatorio.setText(listaRecordatorios.get(position).getNombreRecordatorio());
-        holder.descripcionRecordatorio.append("Recordar cada: ");
-        holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getCiclo())+" dias, ");
+        holder.descripcionRecordatorio.setText("Recordar cada: ");
+        holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getCiclo())+" dias, a las ");
         holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getHoraRecordatorio()+":"));
         holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getMinRecordatorio()));
 

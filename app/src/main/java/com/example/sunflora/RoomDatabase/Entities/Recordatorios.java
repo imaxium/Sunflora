@@ -56,4 +56,8 @@ public class Recordatorios {
     public void setIdPlantaRef(String idPlantaRef) {
         this.idPlantaRef = idPlantaRef;
     }
+
+    public String getIdPlantaRef() {
+        return idPlantaRef;
+    }
 }

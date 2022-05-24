@@ -1,4 +1,4 @@
-package com.example.sunflora.adapter;
+package com.example.sunflora.adapters;
 
 import android.os.Bundle;
 import android.view.View;

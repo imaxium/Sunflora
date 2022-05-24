@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sunflora.R;
-import com.example.sunflora.adapter.AdapterTiposDePlantas;
+import com.example.sunflora.adapters.AdapterTiposDePlantas;
 import com.example.sunflora.model.TipoDePlanta;
 
 import java.util.ArrayList;

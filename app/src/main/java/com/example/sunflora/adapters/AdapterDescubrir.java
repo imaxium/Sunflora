@@ -1,4 +1,4 @@
-package com.example.sunflora.adapter;
+package com.example.sunflora.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class AdapterDescubrir extends RecyclerView.Adapter<AdapterDescubrir.ViewHolder> {
 
     LayoutInflater inflater;
-    ArrayList<Descubrir> listaDescubrir = new ArrayList<Descubrir>();
+    ArrayList<Descubrir> listaDescubrir;
     Context context;
 
     public AdapterDescubrir(Context context, ArrayList<Descubrir> listaDescubrir) {
@@ -75,7 +75,7 @@ public class AdapterDescubrir extends RecyclerView.Adapter<AdapterDescubrir.View
         return listaDescubrir.size();
     }
 
-    public class  ViewHolder extends RecyclerView.ViewHolder{
+    public static class  ViewHolder extends RecyclerView.ViewHolder{
 
         TextView tituloDescubrir, descripcionDescubrir;
         ImageView fotoDescubrir;

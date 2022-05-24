@@ -44,9 +44,9 @@ public class FragmentCrearRecordatorio extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = this.getArguments();
-        if (bundle != null) {
-            idPlantaRef = bundle.getString("idPlanta");
+
+        if (getArguments() != null) {
+            idPlantaRef = getArguments().getString("idPlanta");
         }
     }
 
@@ -107,7 +107,11 @@ public class FragmentCrearRecordatorio extends Fragment {
                 recordatorio.setMinRecordatorio(materialTimePicker.getMinute());
                 recordatorio.setIdPlantaRef(idPlantaRef);
                 daoPlantas.insertarRecordatorios(recordatorio);
-
+                try {
+                    finalize();
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
             }
         });
     }

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.sunflora.R;
-import com.example.sunflora.adapter.AdapterFirebasePlanta;
+import com.example.sunflora.adapters.AdapterFirebasePlanta;
 import com.example.sunflora.model.Planta;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;

@@ -1,4 +1,4 @@
-package com.example.sunflora.adapter;
+package com.example.sunflora.adapters;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

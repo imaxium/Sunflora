@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -24,15 +25,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.ConversorDeDatos;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
+import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
+import com.example.sunflora.adapters.AdapterListaRecordatorios;
 import com.example.sunflora.databinding.FragmentAnyadirPlantaBinding;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+
+import java.util.ArrayList;
 
 public class FragmentAñadirPlanta extends Fragment {
 
@@ -50,13 +56,13 @@ public class FragmentAñadirPlanta extends Fragment {
     MaterialDatePicker materialDatePicker;
     PlantaRoom plantaRoom;
     DAOPlantas daoPlantas;
-    public FragmentAñadirPlanta() { }
+    String idPlanta;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            idPlanta = getArguments().getString("idPlanta");
         }
     }
 
@@ -64,6 +70,9 @@ public class FragmentAñadirPlanta extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAnyadirPlantaBinding.inflate(inflater, container, false);
+        daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
+        plantaRoom = new PlantaRoom();
+
         return binding.getRoot();
     }
 
@@ -72,6 +81,7 @@ public class FragmentAñadirPlanta extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        plantaRoom.setIdPlanta(idPlanta);
 
         arrayUbicaciones = view.getResources().getStringArray(R.array.ubicacion_de_planta);
         arrayTipoDePlantas = view.getResources().getStringArray(R.array.tipos_de_plantas);
@@ -123,6 +133,21 @@ public class FragmentAñadirPlanta extends Fragment {
             }
         });
 
+        agregarFotoDeLaPlanta();
+
+}
+
+    private void recuperarListaDeRecordatoriosDeLaPlanta() {
+
+        if (plantaRoom != null){
+            ArrayList<Recordatorios> listaRecordatorios = (ArrayList<Recordatorios>) daoPlantas.recuperarRecordatorios(plantaRoom.getIdPlanta());
+            binding.RecyclerNumeroDeRecordatorios.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
+            AdapterListaRecordatorios adapterListaRecordatorios = new AdapterListaRecordatorios(getContext(), listaRecordatorios);
+            binding.RecyclerNumeroDeRecordatorios.setAdapter(adapterListaRecordatorios);
+        }
+    }
+
+    private void agregarFotoDeLaPlanta() {
         //metodo para recoger la foro tomada por camara
         activityResultLauncherCamara = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -157,16 +182,13 @@ public class FragmentAñadirPlanta extends Fragment {
                 activityResultLauncherGaleria.launch("image/*");
             }
         });
-}
+    }
 
     private void añadirPlanta(View view) {
-        daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
-
-        plantaRoom = new PlantaRoom();
         plantaRoom.setNombre(binding.EditTextNombrePlanta.getText().toString());
         plantaRoom.setLocalizacion(binding.autoCompleteTextViewUbicaciones.getText().toString());
         plantaRoom.setTipo(binding.autoCompleteTextViewTipoPlanta.getText().toString());
-        plantaRoom.setFechaInicioRecordatorio(materialDatePicker.getHeaderText());
+        plantaRoom.setFechaInicioRecordatorio(binding.TextViewNombreFechaDelRecordatorio.getText().toString());
 
         //convertimos los recursos drawable de la foto de la planta a bitmap para poder insertarlo en la base de datos.
         Bitmap bitmapFoto = ((BitmapDrawable)binding.ImageViewFotoPlantaACrear.getDrawable()).getBitmap();
@@ -195,6 +217,12 @@ public class FragmentAñadirPlanta extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        recuperarListaDeRecordatoriosDeLaPlanta();
     }
 
 

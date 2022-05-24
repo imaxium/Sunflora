@@ -10,6 +10,7 @@ import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
 import com.example.sunflora.RoomDatabase.Entities.PlantaYRecordatorios;
 import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -22,8 +23,8 @@ public interface DAOPlantas {
     void insertarRecordatorios(Recordatorios recordatorio);
 
     @Transaction
-    @Query("SELECT * FROM Planta WHERE idPlanta = :idPlanta")
-    List<PlantaYRecordatorios> recuperarPlantaYRecordatorios(int idPlanta);
+    @Query("SELECT * FROM Planta")
+    List<PlantaRoom> recuperarPlantas();
 
     @Delete
     void EliminarPlanta(PlantaRoom plantaRoom);
@@ -31,5 +32,6 @@ public interface DAOPlantas {
     @Delete
     void EliminarRecordatorio(Recordatorios recordatorios);
 
-
+    @Query("SELECT * FROM Recordatorios WHERE idPlantaRef = :idPlantaRef")
+    List<Recordatorios> recuperarRecordatorios(String idPlantaRef);
 }

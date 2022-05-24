@@ -22,16 +22,16 @@ public class PlantaRoom {
     String tipo;
     String fechaInicioRecordatorio;
 
-    public PlantaRoom(){
-        idPlanta = UUID.randomUUID().toString();
-    }
-
     public String getFechaInicioRecordatorio() { return fechaInicioRecordatorio; }
 
     public void setFechaInicioRecordatorio(String fechaInicioRecordatorio) { this.fechaInicioRecordatorio = fechaInicioRecordatorio; }
 
     public String getIdPlanta() {
         return idPlanta;
+    }
+
+    public void setIdPlanta(@NonNull String idPlanta) {
+        this.idPlanta = idPlanta;
     }
 
     public String getNombre() {
@@ -61,5 +61,9 @@ public class PlantaRoom {
     public String getTipo() { return tipo; }
 
     public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public void generarUUID(){
+        idPlanta = UUID.randomUUID().toString();
+    }
 
 }
