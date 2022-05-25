@@ -1,6 +1,9 @@
 package com.example.sunflora.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,12 +12,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.ConversorDeDatos;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
 import com.example.sunflora.RoomDatabase.Entities.PlantaYRecordatorios;
+import com.example.sunflora.gestionRecordatorios.ActivityContenedoraGestionRecordatorios;
 
 import java.util.ArrayList;
 
@@ -37,9 +42,18 @@ public class AdapterListaDePlantasYRecordatorios extends RecyclerView.Adapter<Ad
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nombrePlanta.setText(listaPlantasYRecordatorios.get(position).getNombre());
         holder.fotoPlanta.setImageBitmap(ConversorDeDatos.convertirByteArrayABitmap(listaPlantasYRecordatorios.get(position).getFotoFlor()));
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, ActivityContenedoraGestionRecordatorios.class);
+                intent.putExtra("clasePlanta", (Parcelable) listaPlantasYRecordatorios.get(position));
+                intent.putExtra("opcion", "info planta");
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
