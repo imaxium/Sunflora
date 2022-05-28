@@ -1,17 +1,11 @@
 package com.example.sunflora.RoomDatabase.Entities;
 
 import androidx.room.Embedded;
-import androidx.room.Relation;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PlantaYRecordatorios {
 
-    @Embedded
-    public PlantaRoom plantaRoom;
-    @Relation(
-        parentColumn ="idPlanta",
-        entityColumn = "idPlantaRef"
-    )
-    public List<Recordatorios> listaRecordatorios;
+    @Embedded public PlantaRoom plantaRoom;
+    public ArrayList<Recordatorio> listaRecordatorios;
 }

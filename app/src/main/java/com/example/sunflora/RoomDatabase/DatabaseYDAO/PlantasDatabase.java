@@ -7,9 +7,9 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
-import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
+import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 
-@Database(entities = {PlantaRoom.class, Recordatorios.class}, version = 1)
+@Database(entities = {PlantaRoom.class, Recordatorio.class}, version = 1)
 public abstract class PlantasDatabase extends RoomDatabase {
 
     private static PlantasDatabase plantasDatabase = null;
@@ -22,7 +22,9 @@ public abstract class PlantasDatabase extends RoomDatabase {
                     context.getApplicationContext(),
                     PlantasDatabase.class,
                     "Plantas"
-                    ).allowMainThreadQueries().build();
+                    ).allowMainThreadQueries()
+                    .fallbackToDestructiveMigration()
+                    .build();
         }
         return plantasDatabase;
     }

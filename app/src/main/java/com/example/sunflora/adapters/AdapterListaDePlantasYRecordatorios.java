@@ -44,12 +44,16 @@ public class AdapterListaDePlantasYRecordatorios extends RecyclerView.Adapter<Ad
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.nombrePlanta.setText(listaPlantasYRecordatorios.get(position).getNombre());
-        holder.fotoPlanta.setImageBitmap(ConversorDeDatos.convertirByteArrayABitmap(listaPlantasYRecordatorios.get(position).getFotoFlor()));
+        try {
+            holder.fotoPlanta.setImageBitmap(ConversorDeDatos.convertirByteArrayABitmap(listaPlantasYRecordatorios.get(position).getFotoFlor()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, ActivityContenedoraGestionRecordatorios.class);
-                intent.putExtra("clasePlanta", (Parcelable) listaPlantasYRecordatorios.get(position));
+                intent.putExtra("clasePlanta", listaPlantasYRecordatorios.get(position));
                 intent.putExtra("opcion", "info planta");
                 context.startActivity(intent);
             }

@@ -9,19 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.ImageView;
 
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
-import com.example.sunflora.RoomDatabase.Entities.PlantaYRecordatorios;
-import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
-import com.example.sunflora.databinding.FragmentAnyadirPlantaBinding;
+import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 import com.example.sunflora.databinding.FragmentCrearRecordatorioBinding;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
@@ -45,9 +39,10 @@ public class FragmentCrearRecordatorio extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
+        if (getArguments() != null)
             idPlantaRef = getArguments().getString("idPlanta");
-        }
+
+        daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
     }
 
     @Override
@@ -62,17 +57,10 @@ public class FragmentCrearRecordatorio extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         arrayNombreRecordatorios = view.getResources().getStringArray(R.array.Recordatorios);
-
         arrayAdapterNombreRecordatorio = new ArrayAdapter<String>(getContext(), R.layout.row_dropdowmenu, arrayNombreRecordatorios);
 
+        binding.ImageViewEliminarRecordatorio.setVisibility(View.GONE);
         binding.autoCompleteTextViewNombreRecordatorio.setAdapter(arrayAdapterNombreRecordatorio);
-        binding.autoCompleteTextViewNombreRecordatorio.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String nombreRecordatorio = adapterView.getItemAtPosition(position).toString();
-            }
-        });
-
         binding.autoCompleteTextViewHoraRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,20 +86,14 @@ public class FragmentCrearRecordatorio extends Fragment {
         binding.BotonGuardarRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
 
-                Recordatorios recordatorio = new Recordatorios();
+                Recordatorio recordatorio = new Recordatorio();
                 recordatorio.setNombreRecordatorio(binding.autoCompleteTextViewNombreRecordatorio.getText().toString());
-                recordatorio.setCiclo(Integer.parseInt(binding.EditTextRepeticiones.getText().toString()));
+                recordatorio.setCiclo(Integer.parseInt(binding.editTextRepeticiones.getText().toString()));
                 recordatorio.setHoraRecordatorio(materialTimePicker.getHour());
                 recordatorio.setMinRecordatorio(materialTimePicker.getMinute());
                 recordatorio.setIdPlantaRef(idPlantaRef);
-                daoPlantas.insertarRecordatorios(recordatorio);
-                try {
-                    finalize();
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
-                }
+                daoPlantas.insertarRecordatorio(recordatorio);
             }
         });
     }
@@ -128,5 +110,11 @@ public class FragmentCrearRecordatorio extends Fragment {
         c.setTime(date);
 
         return c;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 }

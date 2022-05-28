@@ -34,13 +34,15 @@ public class ActivityContenedoraGestionRecordatorios extends AppCompatActivity {
                 Bundle bundle = new Bundle();
                 bundle.putString("idPlanta", plantaRoom.getIdPlanta());
                 fragmentAñadirPlanta.setArguments(bundle);
-                fragmentTransaction.add(R.id.ActivityContenedoraGestionRecordatorios, fragmentAñadirPlanta).commit();
+                fragmentTransaction.replace(R.id.ActivityContenedoraGestionRecordatorios, fragmentAñadirPlanta).commit();
                 break;
             case "info planta":
                 fragmentInfoPlantaCreada = new FragmentInfoPlantaCreada();
-                PlantaRoom plantaInfo = getIntent().getParcelableExtra("clasePlanta");
-
-
+                PlantaRoom plantaInfo = (PlantaRoom) getIntent().getSerializableExtra("clasePlanta");
+                Bundle bundle1 = new Bundle();
+                bundle1.putSerializable("clasePlanta", plantaInfo);
+                fragmentInfoPlantaCreada.setArguments(bundle1);
+                fragmentTransaction.replace(R.id.ActivityContenedoraGestionRecordatorios, fragmentInfoPlantaCreada).commit();
                 break;
             default:
                 Toast.makeText(this, "no se ha podido realzar las operaciones", Toast.LENGTH_SHORT).show();

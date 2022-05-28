@@ -15,14 +15,9 @@ import android.view.ViewGroup;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
-import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
 import com.example.sunflora.adapters.AdapterListaDePlantasYRecordatorios;
-import com.example.sunflora.adapters.AdapterListaRecordatorios;
-import com.example.sunflora.databinding.FragmentAnyadirPlantaBinding;
 import com.example.sunflora.databinding.FragmentJardinBinding;
 import com.example.sunflora.gestionRecordatorios.ActivityContenedoraGestionRecordatorios;
-import com.example.sunflora.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -54,6 +49,7 @@ public class FragmentJardin extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), ActivityContenedoraGestionRecordatorios.class);
+                intent.putExtra("opcion", "añadir planta");
                 startActivity(intent);
             }
         });

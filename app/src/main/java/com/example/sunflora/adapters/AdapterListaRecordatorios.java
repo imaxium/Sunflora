@@ -1,27 +1,32 @@
 package com.example.sunflora.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sunflora.R;
-import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
+import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
+import com.example.sunflora.gestionRecordatorios.FragmentActualizarRecordatorio;
 
 import java.util.ArrayList;
 
 public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterListaRecordatorios.ViewHolder> {
 
     LayoutInflater inflater;
-    ArrayList<Recordatorios> listaRecordatorios = new ArrayList<Recordatorios>();
+    ArrayList<Recordatorio> listaRecordatorios = new ArrayList<Recordatorio>();
     Context context;
 
-    public AdapterListaRecordatorios(Context context, ArrayList<Recordatorios> listaRecordatorios){
+    public AdapterListaRecordatorios(Context context, ArrayList<Recordatorio> listaRecordatorios){
         this.inflater = LayoutInflater.from(context);
         this.listaRecordatorios = listaRecordatorios;
         this.context = context;
@@ -35,7 +40,7 @@ public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterLista
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AdapterListaRecordatorios.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AdapterListaRecordatorios.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tipoRecordatorio.setText(listaRecordatorios.get(position).getNombreRecordatorio());
         holder.descripcionRecordatorio.setText("Recordar cada: ");
         holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getCiclo())+" dias, a las ");
@@ -45,7 +50,12 @@ public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterLista
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                FragmentManager manager = ((AppCompatActivity)context).getSupportFragmentManager();
+                FragmentActualizarRecordatorio far = new FragmentActualizarRecordatorio();
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("claseRecordatorio", listaRecordatorios.get(position));
+                far.setArguments(bundle);
+                manager.beginTransaction().replace(R.id.ActivityContenedoraGestionRecordatorios, far).addToBackStack(null).commit();
             }
         });
     }

@@ -1,10 +1,14 @@
 package com.example.sunflora.RoomDatabase.Entities;
 
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
-@Entity
-public class Recordatorios {
+import java.io.Serializable;
+
+@Entity(foreignKeys = @ForeignKey(entity = PlantaRoom.class, parentColumns = "idPlanta", childColumns = "idPlantaRef", onDelete = ForeignKey.CASCADE))
+public class Recordatorio implements Serializable {
+
     @PrimaryKey(autoGenerate = true)
     int idRecordatorio;
     String nombreRecordatorio;

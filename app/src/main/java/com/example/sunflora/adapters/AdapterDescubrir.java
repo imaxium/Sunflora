@@ -22,9 +22,9 @@ import java.util.ArrayList;
 
 public class AdapterDescubrir extends RecyclerView.Adapter<AdapterDescubrir.ViewHolder> {
 
-    LayoutInflater inflater;
-    ArrayList<Descubrir> listaDescubrir;
-    Context context;
+    final LayoutInflater inflater;
+    final ArrayList<Descubrir> listaDescubrir;
+    final Context context;
 
     public AdapterDescubrir(Context context, ArrayList<Descubrir> listaDescubrir) {
         this.inflater = LayoutInflater.from(context);
@@ -77,9 +77,10 @@ public class AdapterDescubrir extends RecyclerView.Adapter<AdapterDescubrir.View
 
     public static class  ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView tituloDescubrir, descripcionDescubrir;
-        ImageView fotoDescubrir;
-        CardView cardView;
+        final TextView tituloDescubrir;
+        final TextView descripcionDescubrir;
+        final ImageView fotoDescubrir;
+        final CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tituloDescubrir = (TextView) itemView.findViewById(R.id.TituloDescubrir);

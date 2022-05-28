@@ -23,16 +23,14 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.ConversorDeDatos;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
-import com.example.sunflora.RoomDatabase.Entities.Recordatorios;
+import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 import com.example.sunflora.adapters.AdapterListaRecordatorios;
 import com.example.sunflora.databinding.FragmentAnyadirPlantaBinding;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -61,9 +59,11 @@ public class FragmentAñadirPlanta extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        if (getArguments() != null)
             idPlanta = getArguments().getString("idPlanta");
-        }
+
+        plantaRoom = new PlantaRoom();
+        plantaRoom.setIdPlanta(idPlanta);
     }
 
     @Override
@@ -71,8 +71,6 @@ public class FragmentAñadirPlanta extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentAnyadirPlantaBinding.inflate(inflater, container, false);
         daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
-        plantaRoom = new PlantaRoom();
-
         return binding.getRoot();
     }
 
@@ -81,8 +79,6 @@ public class FragmentAñadirPlanta extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        plantaRoom.setIdPlanta(idPlanta);
-
         arrayUbicaciones = view.getResources().getStringArray(R.array.ubicacion_de_planta);
         arrayTipoDePlantas = view.getResources().getStringArray(R.array.tipos_de_plantas);
 
@@ -90,22 +86,7 @@ public class FragmentAñadirPlanta extends Fragment {
         arrayAdaptertipoDePlantas = new ArrayAdapter<String>(getContext(), R.layout.row_dropdowmenu, arrayTipoDePlantas);
 
         binding.autoCompleteTextViewUbicaciones.setAdapter(arrayAdapterUbicaciones);
-        //esto puede que lo borre porque no sirve de mucho
-        binding.autoCompleteTextViewUbicaciones.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String ubicacion = adapterView.getItemAtPosition(position).toString();
-            }
-        });
-
         binding.autoCompleteTextViewTipoPlanta.setAdapter(arrayAdaptertipoDePlantas);
-        //esto puede que lo borre porque no sirve de mucho
-        binding.autoCompleteTextViewTipoPlanta.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                String tipoDePlanta = adapterView.getItemAtPosition(position).toString();
-            }
-        });
 
         binding.TextViewNombreFechaDelRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +105,7 @@ public class FragmentAñadirPlanta extends Fragment {
         binding.botonAAdirRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                daoPlantas.insertarPlanta(plantaRoom);
                 fragmentCrearRecordatorio = new FragmentCrearRecordatorio();
                 Bundle bundle = new Bundle();
                 bundle.putString("idPlanta", plantaRoom.getIdPlanta());
@@ -134,13 +116,12 @@ public class FragmentAñadirPlanta extends Fragment {
         });
 
         agregarFotoDeLaPlanta();
-
 }
 
     private void recuperarListaDeRecordatoriosDeLaPlanta() {
 
         if (plantaRoom != null){
-            ArrayList<Recordatorios> listaRecordatorios = (ArrayList<Recordatorios>) daoPlantas.recuperarRecordatorios(plantaRoom.getIdPlanta());
+            ArrayList<Recordatorio> listaRecordatorios = (ArrayList<Recordatorio>) daoPlantas.recuperarRecordatorios(plantaRoom.getIdPlanta());
             binding.RecyclerNumeroDeRecordatorios.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext()));
             AdapterListaRecordatorios adapterListaRecordatorios = new AdapterListaRecordatorios(getContext(), listaRecordatorios);
             binding.RecyclerNumeroDeRecordatorios.setAdapter(adapterListaRecordatorios);
