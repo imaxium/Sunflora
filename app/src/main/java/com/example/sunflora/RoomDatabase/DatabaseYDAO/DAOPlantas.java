@@ -29,11 +29,14 @@ public interface DAOPlantas {
     @Query("SELECT * FROM Recordatorio WHERE idPlantaRef = :idPlantaRef")
     List<Recordatorio> recuperarRecordatorios(String idPlantaRef);
 
-    // a parte de la planta, elimina todos los recordatorios asociados a su UUID
     @Delete
     void EliminarPlanta(PlantaRoom plantaRoom);
 
     @Delete
     void eliminarRecordatorio(Recordatorio recordatorio);
+
+    @Transaction
+    @Query("DELETE FROM Recordatorio WHERE idPlantaRef = :idPlantaRef")
+    void eliminarTodosLosRecordatoriosDeUnaPlanta(String idPlantaRef);
 
 }

@@ -28,6 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".configuracionNotificaciones.CrearNotificaciones" android:enabled="true"/>
     </application>
 
 </manifest>

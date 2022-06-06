@@ -33,6 +33,7 @@ public class FragmentCrearRecordatorio extends Fragment {
     MaterialTimePicker materialTimePicker;
     DAOPlantas daoPlantas;
     String idPlantaRef;
+    Calendar cal;
     public FragmentCrearRecordatorio() { }
 
     @Override
@@ -64,7 +65,7 @@ public class FragmentCrearRecordatorio extends Fragment {
         binding.autoCompleteTextViewHoraRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar cal = parseTime(4, 8);
+                cal = parseTime(4, 8);
 
                 materialTimePicker = new MaterialTimePicker.Builder()
                         .setTimeFormat(TimeFormat.CLOCK_24H)

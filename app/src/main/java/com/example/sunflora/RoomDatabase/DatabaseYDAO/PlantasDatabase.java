@@ -5,11 +5,16 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
+
+import com.example.sunflora.RoomDatabase.Entities.ContenidoNotificaciones;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
 import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
+import com.example.sunflora.RoomDatabase.typeConverter;
 
-@Database(entities = {PlantaRoom.class, Recordatorio.class}, version = 1)
+@Database(entities = {PlantaRoom.class, Recordatorio.class, ContenidoNotificaciones.class}, version = 7)
+@TypeConverters({typeConverter.class})
 public abstract class PlantasDatabase extends RoomDatabase {
 
     private static PlantasDatabase plantasDatabase = null;

@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.ConversorDeDatos;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
-import com.example.sunflora.RoomDatabase.Entities.PlantaYRecordatorios;
 import com.example.sunflora.gestionRecordatorios.ActivityContenedoraGestionRecordatorios;
 
 import java.util.ArrayList;

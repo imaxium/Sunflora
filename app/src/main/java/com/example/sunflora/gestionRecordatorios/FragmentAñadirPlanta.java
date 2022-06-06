@@ -64,13 +64,15 @@ public class FragmentAñadirPlanta extends Fragment {
 
         plantaRoom = new PlantaRoom();
         plantaRoom.setIdPlanta(idPlanta);
+        daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
+        daoPlantas.insertarPlanta(plantaRoom);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentAnyadirPlantaBinding.inflate(inflater, container, false);
-        daoPlantas = PlantasDatabase.getDBInstance(getContext()).daoPlantas();
+
         return binding.getRoot();
     }
 
@@ -105,7 +107,7 @@ public class FragmentAñadirPlanta extends Fragment {
         binding.botonAAdirRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                daoPlantas.insertarPlanta(plantaRoom);
+
                 fragmentCrearRecordatorio = new FragmentCrearRecordatorio();
                 Bundle bundle = new Bundle();
                 bundle.putString("idPlanta", plantaRoom.getIdPlanta());

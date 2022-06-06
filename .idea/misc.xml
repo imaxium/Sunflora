@@ -14,18 +14,20 @@
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/drawable/ic_baseline_add_a_photo_24.xml" value="0.18" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/drawable/ic_baseline_add_photo_alternate_24.xml" value="0.2385" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/drawable/ic_baseline_notifications_none_24.xml" value="0.18" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.2385" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.1935" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_actiivty_contenedora_descubrir.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_contenedora_gestion_recordatorios.xml" value="0.14233907524932005" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_contenedora_jardin.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_contenedora_registro_plantas.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_info_planta.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/activity_main.xml" value="0.1791363830696879" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fila_boton_recordatorio_info_planta.xml" value="0.4" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fila_recordatorio.xml" value="0.4" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_actualizar_planta.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_actualizar_recordatorio.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_anyadir_planta.xml" value="0.4199623352165725" />
-        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_crear_recordatorio.xml" value="0.24017232094776522" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_crear_recordatorio.xml" value="0.4" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_crear_recordatorio2.xml" value="0.264" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_descripcion_planta.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_descubrir.xml" value="0.19067977768277042" />
@@ -35,10 +37,14 @@
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_lista_plantas.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_prueba.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/fragment_tipo_deplantas.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/login_activity.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/row_descubrir.xml" value="0.4" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/row_dropdowmenu.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/row_planta.xml" value="0.19067977768277042" />
         <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/layout/row_recordatorio_jardin.xml" value="0.1995249406175772" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/menu/bottom_nav_menu.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/menu/menu_opciones.xml" value="0.19067977768277042" />
+        <entry key="..\:/Users/usuario/Desktop/TFC/Sunflora/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.2385" />
       </map>
     </option>
   </component>

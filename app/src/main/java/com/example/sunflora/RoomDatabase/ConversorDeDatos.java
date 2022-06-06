@@ -9,7 +9,7 @@ public class ConversorDeDatos {
 
     public static byte[] convertirBitmapAByteArray(Bitmap bitmap){
         ByteArrayOutputStream  stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 0, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         return stream.toByteArray();
     }
 

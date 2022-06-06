@@ -5,6 +5,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.sunflora.R;
 
@@ -32,5 +36,25 @@ public class ActivityContenedoraRegistroPlantas extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_opciones, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.restaurarCopiaDeSeguridad:
+                Toast.makeText(this, "subir copia de seguridad", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.subirCopiaDeSeguridad:
+                Toast.makeText(this, "restaurar copia de seguridad", Toast.LENGTH_SHORT).show();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

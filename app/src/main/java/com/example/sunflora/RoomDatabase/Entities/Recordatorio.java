@@ -3,10 +3,14 @@ package com.example.sunflora.RoomDatabase.Entities;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
+
+import com.example.sunflora.RoomDatabase.typeConverter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-@Entity(foreignKeys = @ForeignKey(entity = PlantaRoom.class, parentColumns = "idPlanta", childColumns = "idPlantaRef", onDelete = ForeignKey.CASCADE))
+@Entity(foreignKeys = @ForeignKey(entity = PlantaRoom.class, parentColumns = "idPlanta", childColumns = "idPlantaRef"))
 public class Recordatorio implements Serializable {
 
     @PrimaryKey(autoGenerate = true)
@@ -16,6 +20,11 @@ public class Recordatorio implements Serializable {
     int horaRecordatorio;
     int minRecordatorio;
     String idPlantaRef;
+
+    @TypeConverters(typeConverter.class)
+    ArrayList<String> diasParaRecordar;
+
+    public Recordatorio() {}
 
     public int getIdRecordatorio() {
         return idRecordatorio;
@@ -29,9 +38,7 @@ public class Recordatorio implements Serializable {
         return nombreRecordatorio;
     }
 
-    public void setNombreRecordatorio(String nombreRecordatorio) {
-        this.nombreRecordatorio = nombreRecordatorio;
-    }
+    public void setNombreRecordatorio(String nombreRecordatorio) { this.nombreRecordatorio = nombreRecordatorio; }
 
     public int getCiclo() {
         return ciclo;
@@ -45,9 +52,7 @@ public class Recordatorio implements Serializable {
         return horaRecordatorio;
     }
 
-    public void setHoraRecordatorio(int horaRecordatorio) {
-        this.horaRecordatorio = horaRecordatorio;
-    }
+    public void setHoraRecordatorio(int horaRecordatorio) { this.horaRecordatorio = horaRecordatorio; }
 
     public int getMinRecordatorio() {
         return minRecordatorio;
@@ -64,4 +69,8 @@ public class Recordatorio implements Serializable {
     public String getIdPlantaRef() {
         return idPlantaRef;
     }
+
+    public ArrayList<String> getDiasParaRecordar() { return diasParaRecordar; }
+
+    public void setDiasParaRecordar(ArrayList<String> diasParaRecordar) { this.diasParaRecordar = diasParaRecordar; }
 }
