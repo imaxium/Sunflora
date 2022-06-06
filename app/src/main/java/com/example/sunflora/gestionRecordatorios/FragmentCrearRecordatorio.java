@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
@@ -21,6 +23,7 @@ import com.google.android.material.timepicker.TimeFormat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -34,6 +37,7 @@ public class FragmentCrearRecordatorio extends Fragment {
     DAOPlantas daoPlantas;
     String idPlantaRef;
     Calendar cal;
+    ArrayList<String> diasParaRecordar;
     public FragmentCrearRecordatorio() { }
 
     @Override
@@ -90,13 +94,33 @@ public class FragmentCrearRecordatorio extends Fragment {
 
                 Recordatorio recordatorio = new Recordatorio();
                 recordatorio.setNombreRecordatorio(binding.autoCompleteTextViewNombreRecordatorio.getText().toString());
-                recordatorio.setCiclo(Integer.parseInt(binding.editTextRepeticiones.getText().toString()));
                 recordatorio.setHoraRecordatorio(materialTimePicker.getHour());
                 recordatorio.setMinRecordatorio(materialTimePicker.getMinute());
                 recordatorio.setIdPlantaRef(idPlantaRef);
+                comprobarLosDiasSeleccionados();
+                recordatorio.setDiasParaRecordar(diasParaRecordar);
                 daoPlantas.insertarRecordatorio(recordatorio);
             }
         });
+    }
+
+    private void comprobarLosDiasSeleccionados() {
+        diasParaRecordar = new ArrayList<>();
+        if (binding.checkBoxLunes.isChecked())
+            diasParaRecordar.add("lunes");
+        if (binding.checkBoxMartes.isChecked())
+            diasParaRecordar.add("martes");
+        if (binding.checkBoxMiercoles.isChecked())
+            diasParaRecordar.add("miercoles");
+        if (binding.checkBoxJueves.isChecked())
+            diasParaRecordar.add("jueves");
+        if (binding.checkBoxViernes.isChecked())
+            diasParaRecordar.add("viernes");
+        if (binding.checkBoxSabado.isChecked())
+            diasParaRecordar.add("sabado");
+        if (binding.checkBoxDomingo.isChecked())
+            diasParaRecordar.add("domingo");
+
     }
 
     public Calendar parseTime(int hour, int minute){

@@ -16,7 +16,6 @@ public class Recordatorio implements Serializable {
     @PrimaryKey(autoGenerate = true)
     int idRecordatorio;
     String nombreRecordatorio;
-    int ciclo;
     int horaRecordatorio;
     int minRecordatorio;
     String idPlantaRef;
@@ -39,14 +38,6 @@ public class Recordatorio implements Serializable {
     }
 
     public void setNombreRecordatorio(String nombreRecordatorio) { this.nombreRecordatorio = nombreRecordatorio; }
-
-    public int getCiclo() {
-        return ciclo;
-    }
-
-    public void setCiclo(int ciclo) {
-        this.ciclo = ciclo;
-    }
 
     public int getHoraRecordatorio() {
         return horaRecordatorio;
@@ -73,4 +64,5 @@ public class Recordatorio implements Serializable {
     public ArrayList<String> getDiasParaRecordar() { return diasParaRecordar; }
 
     public void setDiasParaRecordar(ArrayList<String> diasParaRecordar) { this.diasParaRecordar = diasParaRecordar; }
+
 }
