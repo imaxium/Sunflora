@@ -14,17 +14,14 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.sunflora.R;
+import com.example.sunflora.databinding.FragmentAnyadirPlantaBinding;
+import com.example.sunflora.databinding.FragmentInfoPlantaBinding;
 import com.example.sunflora.model.Planta;
 
 public class FragmentDescripcionPlanta extends Fragment {
 
     Planta planta;
-    TextView textViewNombreComun;
-    TextView textViewNombreCientifico;
-    TextView textViewTemperatura;
-    TextView textViewRegado;
-    TextView textViewDescripcion;
-    ImageView imageViewFotoPlanta;
+    FragmentInfoPlantaBinding binding;
 
     public FragmentDescripcionPlanta() {}
 
@@ -39,25 +36,19 @@ public class FragmentDescripcionPlanta extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_info_planta, container, false);
-
+        binding = FragmentInfoPlantaBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        textViewNombreComun = view.findViewById(R.id.NombreComunPlanta);
-        textViewNombreCientifico = view.findViewById(R.id.TextViewNombreCientifico);
-        textViewTemperatura = view.findViewById(R.id.TextViewTemperatura);
-        textViewRegado = view.findViewById(R.id.textViewRegado);
-        imageViewFotoPlanta = view.findViewById(R.id.ImageViewFotoPlanta);
-        textViewDescripcion = view.findViewById(R.id.textView);
 
-        textViewNombreComun.setText(planta.getNombre());
-        textViewNombreCientifico.setText(planta.getNombreC());
-        textViewTemperatura.setText(planta.getTemperatura());
-        textViewRegado.setText(planta.getRiego());
-        //textViewDescripcion.setText(planta.getDescripcion());
+        binding.NombreComunPlanta.setText(planta.getNombre());
+        binding.TextViewNombreCientifico.setText(planta.getNombreC());
+        binding.TextViewTemperatura.setText(planta.getTemperatura());
+        binding.textViewRegado.setText(planta.getRiego());
+        binding.textViewDescripcionPlanta.setText(planta.getDescripcion());
         establecerFotoPlanta(view);
     }
 
@@ -65,11 +56,8 @@ public class FragmentDescripcionPlanta extends Fragment {
 
         Glide.with(view.getContext())
                 .load(planta.getFoto())
-                .placeholder(com.firebase.ui.database.R.drawable.common_google_signin_btn_icon_dark)
-                .error(R.drawable.microcarpa)
-                .into(imageViewFotoPlanta);
-
+                .placeholder(R.drawable.leaff)
+                .error(R.drawable.leaff)
+                .into(binding.ImageViewFotoPlanta);
     }
-
-
 }

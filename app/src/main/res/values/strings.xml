@@ -7,5 +7,6 @@
     <string name="guardar">guardar</string>
     <string name="copia_de_seguridad">copia de seguridad</string>
     <string name="restaurar">restaurar</string>
+    <string name="riego">Riego</string>
 
 </resources>

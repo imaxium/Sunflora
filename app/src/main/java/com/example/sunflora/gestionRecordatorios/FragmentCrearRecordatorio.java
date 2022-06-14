@@ -16,6 +16,7 @@ import android.widget.Switch;
 import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
+import com.example.sunflora.RoomDatabase.Entities.ContenidoNotificaciones;
 import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 import com.example.sunflora.databinding.FragmentCrearRecordatorioBinding;
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -38,6 +39,7 @@ public class FragmentCrearRecordatorio extends Fragment {
     String idPlantaRef;
     Calendar cal;
     ArrayList<String> diasParaRecordar;
+    ContenidoNotificaciones contenidoNotificaciones;
     public FragmentCrearRecordatorio() { }
 
     @Override
@@ -93,13 +95,24 @@ public class FragmentCrearRecordatorio extends Fragment {
             public void onClick(View view) {
 
                 Recordatorio recordatorio = new Recordatorio();
+                contenidoNotificaciones = new ContenidoNotificaciones();
+
+                recordatorio.generarUUID();
                 recordatorio.setNombreRecordatorio(binding.autoCompleteTextViewNombreRecordatorio.getText().toString());
                 recordatorio.setHoraRecordatorio(materialTimePicker.getHour());
                 recordatorio.setMinRecordatorio(materialTimePicker.getMinute());
                 recordatorio.setIdPlantaRef(idPlantaRef);
+
                 comprobarLosDiasSeleccionados();
-                recordatorio.setDiasParaRecordar(diasParaRecordar);
+                contenidoNotificaciones.setDiasParaRecordar(diasParaRecordar);
+                contenidoNotificaciones.setIdRecordatorioRef(recordatorio.getIdRecordatorio());
+                contenidoNotificaciones.setIdPlantaRef(idPlantaRef);
+                contenidoNotificaciones.setTituloNotificacion(binding.autoCompleteTextViewNombreRecordatorio.getText().toString());
+                contenidoNotificaciones.setHoraNotificacion(materialTimePicker.getHour());
+                contenidoNotificaciones.setMinutoNotificacion(materialTimePicker.getMinute());
+
                 daoPlantas.insertarRecordatorio(recordatorio);
+                daoPlantas.insertarNotificacion(contenidoNotificaciones);
             }
         });
     }
@@ -111,7 +124,7 @@ public class FragmentCrearRecordatorio extends Fragment {
         if (binding.checkBoxMartes.isChecked())
             diasParaRecordar.add("martes");
         if (binding.checkBoxMiercoles.isChecked())
-            diasParaRecordar.add("miercoles");
+            diasParaRecordar.add("miércoles");
         if (binding.checkBoxJueves.isChecked())
             diasParaRecordar.add("jueves");
         if (binding.checkBoxViernes.isChecked())

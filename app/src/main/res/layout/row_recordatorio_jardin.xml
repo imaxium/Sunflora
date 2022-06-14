@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
-    android:elevation="6dp"
     android:id="@+id/CardViewPlantaYRecordatorioJardin"
     app:cardUseCompatPadding="true">
 
@@ -13,21 +12,29 @@
         android:layout_height="wrap_content"
         android:padding="10dp">
 
-        <ImageView
-            android:id="@+id/ImageViewPlantaJardin"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_centerVertical="true"
-            android:scaleType="fitCenter"
-            android:src="@mipmap/ic_launcher" />
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CardViewPlanta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="6dp"
+            app:cardElevation="0dp">
+            <ImageView
+                android:id="@+id/ImageViewPlantaJardin"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ic_launcher"/>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/TextviewNombrePlantaJardin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ImageViewPlantaJardin"
+            android:layout_toRightOf="@+id/CardViewPlanta"
             android:text="Nombre planta"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+
             android:textSize="25sp" />
 
         <TextView
@@ -36,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/TextviewNombrePlantaJardin"
             android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/ImageViewPlantaJardin"
+            android:layout_toRightOf="@+id/CardViewPlanta"
             android:text="Recordatorios: " />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

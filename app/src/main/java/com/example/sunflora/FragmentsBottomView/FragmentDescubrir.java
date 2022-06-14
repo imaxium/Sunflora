@@ -22,15 +22,8 @@ public class FragmentDescubrir extends Fragment {
 
     AdapterDescubrir adapterDescubrir;
     RecyclerView recyclerViewDescubrir;
-    public FragmentDescubrir() {
-        // Required empty public constructor
-    }
 
-    public static FragmentDescubrir newInstance(String param1, String param2) {
-        FragmentDescubrir fragment = new FragmentDescubrir();
-        Bundle args = new Bundle();
-        return fragment;
-    }
+    public FragmentDescubrir() { }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,8 +35,6 @@ public class FragmentDescubrir extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_descubrir, container, false);
-
-
         return view;
     }
 
@@ -57,7 +48,7 @@ public class FragmentDescubrir extends Fragment {
         ArrayList<Descubrir> descubrirArrayList = new ArrayList<Descubrir>();
         descubrirArrayList.add(new Descubrir(1, R.drawable.floristeria, "Descubre plantas a tu alrededor", "descubre planas a tu alrededor"));
         descubrirArrayList.add(new Descubrir(2, R.drawable.microcarpa, "Mira nuestro registro de plantas", "Mira nuestro registro de plantas"));
-        descubrirArrayList.add(new Descubrir(3, R.drawable.googlelens, "Reconoce las plantas de tu casa", "descubre planas a tu alrededor"));
+        descubrirArrayList.add(new Descubrir(3, R.drawable.googlelens, "Reconoce las plantas de tu casa", "Reconoce las plantas de tu casa"));
 
         recyclerViewDescubrir.setLayoutManager(new LinearLayoutManager(getContext()));
         adapterDescubrir = new AdapterDescubrir(getContext(), descubrirArrayList);

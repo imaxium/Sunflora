@@ -15,4 +15,8 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Widget.AppCompat.Button.Colored" parent="android:Widget">
+        <item name="colorButtonNormal" type="color">#FFEB3B</item>
+        <item name="colorControlHighlight" type="color">#FF5722</item>
+    </style>
 </resources>

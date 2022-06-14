@@ -43,7 +43,7 @@ public class AdapterListaRecordatorios extends RecyclerView.Adapter<AdapterLista
     public void onBindViewHolder(@NonNull AdapterListaRecordatorios.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.tipoRecordatorio.setText(listaRecordatorios.get(position).getNombreRecordatorio());
         holder.descripcionRecordatorio.setText("Recordar cada: ");
-        holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getDiasParaRecordar().size())+" dias, a las ");
+        holder.descripcionRecordatorio.append(String.valueOf(" dias, a las "));
         holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getHoraRecordatorio()+":"));
         holder.descripcionRecordatorio.append(String.valueOf(listaRecordatorios.get(position).getMinRecordatorio()));
 

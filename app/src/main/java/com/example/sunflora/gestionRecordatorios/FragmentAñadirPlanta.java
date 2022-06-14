@@ -3,6 +3,7 @@ package com.example.sunflora.gestionRecordatorios;
 import static android.app.Activity.RESULT_OK;
 
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -29,6 +30,7 @@ import com.example.sunflora.R;
 import com.example.sunflora.RoomDatabase.ConversorDeDatos;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.DAOPlantas;
 import com.example.sunflora.RoomDatabase.DatabaseYDAO.PlantasDatabase;
+import com.example.sunflora.RoomDatabase.Entities.ContenidoNotificaciones;
 import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
 import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 import com.example.sunflora.adapters.AdapterListaRecordatorios;
@@ -80,6 +82,7 @@ public class FragmentAñadirPlanta extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
         arrayUbicaciones = view.getResources().getStringArray(R.array.ubicacion_de_planta);
         arrayTipoDePlantas = view.getResources().getStringArray(R.array.tipos_de_plantas);
@@ -138,7 +141,9 @@ public class FragmentAñadirPlanta extends Fragment {
                 if(result.getResultCode() == RESULT_OK && result.getData() !=null){
                     Bundle bundle = result.getData().getExtras();
                     Bitmap bitmap = (Bitmap) bundle.get("data");
-                    binding.ImageViewFotoPlantaACrear.setImageBitmap(bitmap);
+
+                    binding.ImageViewFotoPlantaACrear.setImageBitmap(cropToSquare(bitmap));
+
                 }
             }
         });
@@ -167,6 +172,20 @@ public class FragmentAñadirPlanta extends Fragment {
         });
     }
 
+    public static Bitmap cropToSquare(Bitmap bitmap){
+        int width  = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        int newWidth = (height > width) ? width : height;
+        int newHeight = (height > width)? height - ( height - width) : height;
+        int cropW = (width - height) / 2;
+        cropW = (cropW < 0)? 0: cropW;
+        int cropH = (height - width) / 2;
+        cropH = (cropH < 0)? 0: cropH;
+        Bitmap cropImg = Bitmap.createBitmap(bitmap, cropW, cropH, newWidth, newHeight);
+
+        return cropImg;
+    }
+
     private void añadirPlanta(View view) {
         plantaRoom.setNombre(binding.EditTextNombrePlanta.getText().toString());
         plantaRoom.setLocalizacion(binding.autoCompleteTextViewUbicaciones.getText().toString());
@@ -176,8 +195,20 @@ public class FragmentAñadirPlanta extends Fragment {
         //convertimos los recursos drawable de la foto de la planta a bitmap para poder insertarlo en la base de datos.
         Bitmap bitmapFoto = ((BitmapDrawable)binding.ImageViewFotoPlantaACrear.getDrawable()).getBitmap();
         plantaRoom.setFotoFlor(ConversorDeDatos.convertirBitmapAByteArray(bitmapFoto));
-
+        
+        añadirContenidoNotificaciones();
         daoPlantas.insertarPlanta(plantaRoom);
+    }
+
+    private void añadirContenidoNotificaciones() {
+        ArrayList<ContenidoNotificaciones> listaNotificaciones = (ArrayList<ContenidoNotificaciones>) daoPlantas.recuperarNotificacionesPorPlanta(plantaRoom.getIdPlanta());
+        ArrayList<ContenidoNotificaciones>listaActualizada = new ArrayList<>();
+
+        for (ContenidoNotificaciones noti: listaNotificaciones){
+            noti.setContenidoNotificacion(plantaRoom.getNombre()+" necesita "+noti.getTituloNotificacion());
+            listaActualizada.add(noti);
+        }
+        daoPlantas.actualizarNotificaciones(listaActualizada);
     }
 
     private void RecogerFecha(View view) {

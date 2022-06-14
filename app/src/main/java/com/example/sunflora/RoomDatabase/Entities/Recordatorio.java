@@ -1,5 +1,6 @@
 package com.example.sunflora.RoomDatabase.Entities;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -9,27 +10,26 @@ import com.example.sunflora.RoomDatabase.typeConverter;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.UUID;
 
 @Entity(foreignKeys = @ForeignKey(entity = PlantaRoom.class, parentColumns = "idPlanta", childColumns = "idPlantaRef"))
 public class Recordatorio implements Serializable {
 
-    @PrimaryKey(autoGenerate = true)
-    int idRecordatorio;
+    @NonNull
+    @PrimaryKey(autoGenerate = false)
+    String idRecordatorio;
     String nombreRecordatorio;
     int horaRecordatorio;
     int minRecordatorio;
     String idPlantaRef;
 
-    @TypeConverters(typeConverter.class)
-    ArrayList<String> diasParaRecordar;
-
     public Recordatorio() {}
 
-    public int getIdRecordatorio() {
+    public String getIdRecordatorio() {
         return idRecordatorio;
     }
 
-    public void setIdRecordatorio(int idRecordatorio) {
+    public void setIdRecordatorio(String idRecordatorio) {
         this.idRecordatorio = idRecordatorio;
     }
 
@@ -61,8 +61,7 @@ public class Recordatorio implements Serializable {
         return idPlantaRef;
     }
 
-    public ArrayList<String> getDiasParaRecordar() { return diasParaRecordar; }
-
-    public void setDiasParaRecordar(ArrayList<String> diasParaRecordar) { this.diasParaRecordar = diasParaRecordar; }
-
+    public void generarUUID(){
+        idRecordatorio = UUID.randomUUID().toString();
+    }
 }

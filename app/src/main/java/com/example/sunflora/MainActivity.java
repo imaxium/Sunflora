@@ -1,7 +1,6 @@
 package com.example.sunflora;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -23,8 +22,6 @@ import androidx.work.WorkInfo;
 import com.example.sunflora.databinding.ActivityMainBinding;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -50,11 +47,10 @@ public class MainActivity extends AppCompatActivity {
         if(!comprobarWorkManagerIniciado(TAG_MY_WORK)) // revisa si el workmanager esta inicializado o no
             inicializarWorkManager(TAG_MY_WORK); // inicializa el workmanager
 
-        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
-        Date d = new Date();
-        String dayOfTheWeek = sdf.format(d);
-        Log.d("fecha", dayOfTheWeek);
 
+
+        /*androidx.work.WorkManager.getInstance(getApplicationContext())
+                .enqueue(saveRequest);*/
     }
 
     private void inicializarWorkManager(String tag) {

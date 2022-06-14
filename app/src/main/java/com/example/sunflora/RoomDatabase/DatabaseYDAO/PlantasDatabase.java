@@ -13,7 +13,7 @@ import com.example.sunflora.RoomDatabase.Entities.PlantaRoom;
 import com.example.sunflora.RoomDatabase.Entities.Recordatorio;
 import com.example.sunflora.RoomDatabase.typeConverter;
 
-@Database(entities = {PlantaRoom.class, Recordatorio.class, ContenidoNotificaciones.class}, version = 8)
+@Database(entities = {PlantaRoom.class, Recordatorio.class, ContenidoNotificaciones.class}, version = 10)
 @TypeConverters({typeConverter.class})
 public abstract class PlantasDatabase extends RoomDatabase {
 
